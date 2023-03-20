@@ -1,14 +1,18 @@
--- incompleto
-select row_number() over (order by SUM(od.unit_price * od.quantity) desc ) as ranking, 
-	p.product_name ,
-	SUM(p.unit_price * p.units_on_order) as "totalquantity" 
-from products p, order_details od 
+
+-- 6. Obtener el ranking de los productos más vendidos
+
+select p.product_name,
+	   SUM(od.quantity) as "totalquantity" 
+from products p
+inner join order_details od on p.product_id = od.product_id 
 group by p.product_name 
-order by ranking
+order by totalquantity desc
+
 
 
 
 
  
+
 
 
