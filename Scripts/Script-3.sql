@@ -1,10 +1,9 @@
 -- 3. Obtener el promedio de cantidad de productos vendidos por categoría (product_name,
 -- quantity_per_unit, unit_price, quantity, avgquantity)
 
-select p.product_name, c.category_name, p.quantity_per_unit , p.unit_price, od.quantity,
-	AVG(od.quantity) over (partition by c.category_name)
-from order_details od
-inner join products p on p.product_id = od.product_id 
-inner join categories c on p.category_id = c.category_id 
-order by p.product_name , c.category_name 
-
+SELECT Product_Name, Category_Name, Quantity_Per_Unit, od.Unit_Price, Quantity,
+AVG(Quantity) OVER(PARTITION BY Categories.Category_ID) AS AvgQuantity
+FROM Order_Details od
+JOIN Products ON od.Product_ID = Products.Product_ID
+JOIN Categories ON Products.Category_ID = Categories.Category_ID
+ORDER BY Category_Name, Product_Name;
